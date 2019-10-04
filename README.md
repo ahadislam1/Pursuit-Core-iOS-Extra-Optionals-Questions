@@ -11,7 +11,25 @@ var testCaseOne: (Int?, Int?, Int?)? = (4, nil, 7)
 var testCaseTwo: (Int?, Int?, Int?)? = (nil, nil, 9)
 var testCaseThree: (Int?, Int?, Int?)? = (5, 10, 24)
 ```
+answer:
+```swift
+var scores: (Int?, Int?, Int?)?
+var testCaseOne: (Int?, Int?, Int?)? = (4, nil, 7)
+var testCaseTwo = ( 4, 4, 7)
+var sum = 0
 
+scores = testCaseOne
+if let one = scores?.0 {
+    sum += one
+}
+if let two = scores?.1 {
+    sum += two
+}
+if let three = scores?.2 {
+    sum += three
+}
+print(sum)
+```
 
 ## Question 2
 
@@ -23,8 +41,17 @@ if Bool.random() {
  tuple = (5, 3)
 }
 ```
+answer:
+```swift
+var tuple: (Int, Int)?
+if Bool.random() {
+    tuple = (5, 3)
+}
 
-
+if let unwrap = tuple {
+    print(unwrap)
+}
+```
 ## Question 3
 
 Write code that either doubles `myInt` and then prints it, or prints an error message if myInt is nil.
@@ -35,7 +62,19 @@ if Bool.random() {
  myInt = 5
 }
 ```
+answer:
+```swift
+var myInt : Int?
+if Bool.random() {
+    myInt = 5
+}
 
+if let integer = myInt {
+    print(integer * 2)
+} else {
+    print("Error message.")
+}
+```
 
 ## Question 4
 
@@ -49,7 +88,21 @@ if Bool.random() {
  myDouble = 12
 }
 ```
+answer:
+```swift
+var myDouble: Double?
+let doubleTwo: Double = 5
 
+if Bool.random() {
+    myDouble = 12
+}
+
+if let doubleOne = myDouble {
+    print(doubleOne * doubleTwo)
+} else {
+    print("Error message.")
+}
+```
 
 ## Question 5
 
@@ -79,7 +132,32 @@ if Bool.random() {
  myTuple.3 = 10
 }
 ```
+answer:
+```swift
+var myTuple: (Int?, Int?, Int?, Int?)
 
+if Bool.random() {
+ myTuple.0 = 5
+ myTuple.2 = 14
+} else {
+ myTuple.1 = 9
+ myTuple.3 = 10
+}
+var sum1 = 0
+
+if let firstNumber = myTuple.0 {
+    sum1 += firstNumber
+}
+if let secondNumber = myTuple.1 {
+    sum1 += secondNumber
+}
+if let thirdNumber = myTuple.2 {
+    sum1 += thirdNumber
+}
+if let fourthNumber = myTuple.3 {
+    sum1 += fourthNumber
+}
+```
 
 ## Question 7
 
@@ -133,6 +211,24 @@ var evolutionaryStone: String?
 pokemon = starterPokemon()
 evolutionaryStone = eStone()
 ```
+answer:
+```swift
+let pokemonArray = ["Pikachu", "Bulbasaur", "Charmander", "Squirtle", "Not a Pokemon"]
+let stoneArray = ["Electric","Grass","Fire","Water","No Stone"]
+var pokemonCanEvolve : Bool?
+pokemon = starterPokemon()
+evolutionaryStone = eStone()
+
+for index in 0...pokemonArray.count - 2 {
+    if pokemon! == pokemonArray[index] && evolutionaryStone! == stoneArray[index] {
+        pokemonCanEvolve = true
+        break
+    }
+}
+if pokemonCanEvolve != nil {
+    print("\(pokemon!) can evolve using \(evolutionaryStone!) stone.")
+}
+```
 
 
 ## Question 8
@@ -146,7 +242,20 @@ if Bool.random() {
  numberOfPeople = 108
 }
 ```
+answer:
+```swift
+var numberOfPeople : Int?
 
+if Bool.random() {
+    numberOfPeople = 108
+}
+
+if let people = numberOfPeople {
+    if people % 2 == 0 {
+        print(people)
+    }
+}
+```
 
 ## Question 9
 
@@ -159,6 +268,23 @@ for i in 0..<20 {
     someNumbers.append(Bool.random() ? i : nil)
 }
 ```
+answer:
+```swift
+var someNumbers : [Int?] = []
+var product = 1
+
+for i in 0..<20 {
+    someNumbers.append(Bool.random() ? i : nil)
+}
+
+for i in 0..<someNumbers.count {
+    if let number = someNumbers[i] {
+        product *= number
+    }
+}
+
+print(product)
+```
 
 ## Question 10
 
@@ -168,6 +294,18 @@ Given the array `poorlyFormattedCityNames`, create a new array with the city nam
 let poorlyFormattedCityNames: [String?] = ["new york", "BOSTON", nil, "chicago", nil, "los angeles", nil, "Dallas",]
 
 Output: ["New York", "Boston", "Chicago", "Los Angeles", "Dallas"]
+```
+answer:
+```swift
+let poorlyFormattedCityNames: [String?] = ["new york", "BOSTON", nil, "chicago", nil, "los angeles", nil, "Dallas",]
+var cityNames = [String]()
+
+for name in poorlyFormattedCityNames {
+    if let cityName = name {
+        cityNames.append(cityName.capitalized)
+    }
+}
+print(cityNames)
 ```
 
 
@@ -182,6 +320,23 @@ for _ in 0..<20 {
  aBunchOfNumbers.append(Bool.random() ? Int(arc4random_uniform(102)) : nil)
 }
 ```
+answer:
+```swift
+var aBunchOfNumbers: [Int?] = []
+var evenNumberArray = [Int]()
+
+for _ in 0..<20 {
+    aBunchOfNumbers.append(Bool.random() ? Int(arc4random_uniform(102)) : nil)
+}
+for index in 0..<aBunchOfNumbers.count {
+    if let number = aBunchOfNumbers[index] {
+        if number % 2 == 0 {
+            evenNumberArray.append(number)
+        }
+    }
+}
+print(evenNumberArray)
+```
 
 
 ## Question 12
@@ -189,19 +344,52 @@ for _ in 0..<20 {
 Given the following array of zip codes as strings, write code that turns them into an array of Ints.
 
 `let zipCodeStrings = ["11377", "11101", "11373", "10014", "10003", "11223"]`
+answer:
+```swift
+let zipCodeStrings = ["11377", "11101", "11373", "10014", "10003", "11223"]
+var zipCodeNumbers = [Int]()
 
+for zipCode in zipCodeStrings {
+    zipCodeNumbers.append(Int(zipCode)!)
+}
+print(zipCodeNumbers)
+```
 
 ## Question 13
 
 Some students were asked some questions about their favorite foods and colors and the answers were stored in an array `studentInfo`.
 
+`let studentInfo: [(String, String?, String?)] = [("Bill", "Burgers", "Blue"), ("Rita", nil, "Red"), ("Peter", "Pizza", "Purple"), ("Sarah", "Sandwiches", nil), ("Jeff", nil, nil), ("Lucy", "Leftovers", "Lilac"), ("Mike", "Meat", "Mauve"), ("Gemma", nil, "Green")]`
+
 - Print the names of the students that do not have a favorite color.
 
+```swift
+for student in studentInfo {
+    if student.2 == nil {
+        print(student.0)
+    }
+}
+```
 - Print the names of the students that don't have a favorite color or a favorite food.
-
+```swift
+for student in studentInfo {
+    if student.1 == nil && student.2 == nil {
+        print(student.0)
+    }
+}
+```
 - Create a new array of type `[(String, String, String)]` that contains the students with both favorite colors and foods.
 
-`let studentInfo: [(String, String?, String?)] = [("Bill", "Burgers", "Blue"), ("Rita", nil, "Red"), ("Peter", "Pizza", "Purple"), ("Sarah", "Sandwiches", nil), ("Jeff", nil, nil), ("Lucy", "Leftovers", "Lilac"), ("Mike", "Meat", "Mauve"), ("Gemma", nil, "Green")]`
+```swift
+var completeStudentInfo = [(String, String, String)]()
+
+for student in studentInfo {
+    if let _ = student.1, let _ = student.2 {
+        completeStudentInfo.append(student as! (String, String, String))
+    }
+}
+print(completeStudentInfo)
+```
 
 
 ## Question 14
